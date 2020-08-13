@@ -1,0 +1,142 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    k8s.v1.cni.cncf.io/networks-status: |-
+      [{
+          "name": "openshift-sdn",
+          "interface": "eth0",
+          "ips": [
+              "10.128.2.84"
+          ],
+          "dns": {},
+          "default-route": [
+              "10.128.2.1"
+          ]
+      }]
+    kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu, memory request for container
+      hello-java; cpu, memory limit for container hello-java'
+    openshift.io/deployment-config.latest-version: "1"
+    openshift.io/deployment-config.name: hello-java
+    openshift.io/deployment.name: hello-java-1
+    openshift.io/scc: restricted
+  creationTimestamp: "2020-06-30T08:16:29Z"
+  generateName: hello-java-1-
+  labels:
+    app: hello-java
+    deployment: hello-java-1
+    deploymentconfig: hello-java
+  name: hello-java-1-xqnjj
+  namespace: isbank-demo
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicationController
+    name: hello-java-1
+    uid: 2902223a-7108-4064-acc4-e5a800862f6e
+  resourceVersion: "710501"
+  selfLink: /api/v1/namespaces/isbank-demo/pods/hello-java-1-xqnjj
+  uid: eedb766c-01cd-4bee-95e6-7f1cc89a30ba
+spec:
+  containers:
+  - image: image-registry.openshift-image-registry.svc:5000/isbank-demo/hello-java@sha256:23789cd37758d88ba4acaa7b820b5e6ab749514607828ee5335ac12ff2614c7e
+    imagePullPolicy: Always
+    name: hello-java
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+    - containerPort: 8443
+      protocol: TCP
+    - containerPort: 8778
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1536Mi
+      requests:
+        cpu: 50m
+        memory: 256Mi
+    securityContext:
+      capabilities:
+        drop:
+        - KILL
+        - MKNOD
+        - SETGID
+        - SETUID
+      runAsUser: 1000940000
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-78pzm
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  imagePullSecrets:
+  - name: default-dockercfg-p2phx
+  nodeName: ip-10-0-182-162.eu-central-1.compute.internal
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1000940000
+    seLinuxOptions:
+      level: s0:c31,c5
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoSchedule
+    key: node.kubernetes.io/memory-pressure
+    operator: Exists
+  volumes:
+  - name: default-token-78pzm
+    secret:
+      defaultMode: 420
+      secretName: default-token-78pzm
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2020-06-30T08:16:29Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2020-06-30T08:16:39Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2020-06-30T08:16:39Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2020-06-30T08:16:29Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: cri-o://4b1390926fc3707059280cad6d53fadd058773f63a29561553d25e8b4b77c927
+    image: image-registry.openshift-image-registry.svc:5000/isbank-demo/hello-java@sha256:23789cd37758d88ba4acaa7b820b5e6ab749514607828ee5335ac12ff2614c7e
+    imageID: image-registry.openshift-image-registry.svc:5000/isbank-demo/hello-java@sha256:23789cd37758d88ba4acaa7b820b5e6ab749514607828ee5335ac12ff2614c7e
+    lastState: {}
+    name: hello-java
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2020-06-30T08:16:38Z"
+  hostIP: 10.0.182.162
+  phase: Running
+  podIP: 10.128.2.84
+  podIPs:
+  - ip: 10.128.2.84
+  qosClass: Burstable
+  startTime: "2020-06-30T08:16:29Z"
